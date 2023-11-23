@@ -87,11 +87,12 @@ int _swap(listint_t **ptr, listint_t **start)
 */
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *start = *list, *ptr, *check;
+	listint_t *start, *ptr, *check;
 	int flag = 0;
 
-	if (!list)
+	if (list == NULL)
 		return;
+	start = *list;
 	ptr = start;
 	while (ptr->next != NULL)
 	{
