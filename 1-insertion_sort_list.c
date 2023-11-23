@@ -89,6 +89,8 @@ void insertion_sort_list(listint_t **list)
 	listint_t *start = *list, *ptr, *check;
 	int flag = 0;
 
+	if (!list)
+		return;
 	ptr = start;
 	while (ptr->next != NULL)
 	{
