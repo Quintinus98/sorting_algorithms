@@ -1,0 +1,98 @@
+void insertion_sort_list(listint_t **list)
+{
+  listint_t *ptr = *list, *temp;
+  int i = 0;
+
+  while (ptr->next != NULL)
+  {
+    temp = ptr->next;
+    if (ptr->n > temp->n)
+    {
+      if (i == 0)
+      {
+        /** Swap for Start position */
+        ptr->next = temp->next;
+        temp->next->prev = temp->prev;
+        temp->next = ptr;
+        temp->prev = NULL;
+        ptr->prev = temp;
+      }
+      else
+      {
+        /** Swap for middle position */
+        ptr->prev->next = ptr->next;
+        ptr->next = temp->next;
+        temp->next->prev = temp->prev;
+        temp->next = ptr;
+        temp->prev = ptr->next; /* Slight difference */
+        ptr->prev = temp;
+      }
+      /** Swap for last position */
+    }
+    i++;
+    ptr = ptr->next;
+  }
+}
+
+void insertion_sort_list(listint_t **list)
+{
+  listint_t *current = *list, *ptr;
+
+  if (current == NULL || current->next == NULL)
+    return;
+  ptr = current->next;
+
+  printf("On start: %d\n", ptr->n);
+  while (ptr->next != NULL)
+  {
+    if ((ptr->n < ptr->prev->n) && (ptr->prev->prev == NULL))
+    {
+      ptr->prev->next = ptr->next;
+      ptr->next->prev = ptr->prev;
+      ptr->next = ptr->prev;
+      ptr->prev->prev = ptr;
+      ptr->prev = NULL;
+      current = ptr;
+      ptr = ptr->next;
+    }
+    else if (ptr->n < ptr->prev->n)
+    {
+      /** Swap for middle position */
+
+    }
+    
+    ptr = ptr->next;
+  }
+  *list = current;
+}
+
+void swap_start(listint_t **ptr, listint_t **start)
+{
+  listint_t *temp = (*ptr)->next;
+
+  /** Swap for Start position */
+  (*ptr)->next = temp->next;
+  temp->next->prev = temp->prev;
+  temp->next = (*ptr);
+  temp->prev = NULL;
+  (*ptr)->prev = temp;
+  (*start) = (*ptr)->prev;
+  write(1, "Start swapped\n", 14);
+}
+
+void swap_middle(listint_t **ptr)
+{
+  listint_t *temp = (*ptr)->next;
+
+  (*ptr)->prev->next = (*ptr)->next;
+  (*ptr)->next = temp->next;
+  temp->next->prev = temp->prev;
+  temp->next = (*ptr);
+  temp->prev = (*ptr)->next;
+  (*ptr)->prev = temp;
+
+  printf("ptr->prev: %d\n", (*ptr)->prev->n);
+  printf("ptr->prev->prev: %d\n", (*ptr)->prev->prev->n);
+
+  write(1, "Middle swapped\n", 15);
+}
