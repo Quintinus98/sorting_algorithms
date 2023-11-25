@@ -28,6 +28,10 @@ void swap_start(listint_t **ptr, listint_t **start);
 void swap_middle(listint_t **ptr);
 void swap_last(listint_t **ptr);
 void selection_sort(int *array, size_t size);
+void quick_sort(int *array, size_t size);
+void swap(int *a, int *b);
+int divide_up(int *array, int low, int high, int size);
+void quickSort(int *array, int low, int high, int size);
 
 
 #endif
